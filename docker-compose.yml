@@ -1,15 +1,15 @@
 version: '3'
 services:
-  nodejs-server:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile-dev
-    ports:
-      - "3000:3000"
-    container_name: node-backend
-    volumes:
-      - ./backend:/home/node/app/backend
-      #- /home/node/app/backend/node_modules
+  #nodejs-server:
+  #  build:
+  #    context: ./backend
+  #    dockerfile: Dockerfile-dev
+  #  ports:
+  #    - "3000:3000"
+  #  container_name: node-backend
+  #  volumes:
+  #    - ./api:/usr/src/app/backend
+  #    - /usr/src/app/backend/node_modules
   angular-ui:
     build:
       context: ./frontend
@@ -18,5 +18,5 @@ services:
       - "4201:4201"
     container_name: testapp
     volumes:
-      - ./frontend:/home/node/app/frontend
-      #- /home/node/app/frontend/node_modules 
+      - ./frontend:/usr/src/app/frontend
+      - /usr/src/app/frontend/node_modules 

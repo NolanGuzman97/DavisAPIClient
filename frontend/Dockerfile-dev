@@ -1,6 +1,6 @@
 # Stage 1
 FROM node:current-alpine3.10 AS base_build
-WORKDIR /home/node/app/frontend
+WORKDIR /usr/src/app/frontend
 COPY package*.json ./
 RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
 EXPOSE 4201
