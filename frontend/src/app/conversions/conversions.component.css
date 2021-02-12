@@ -1,0 +1,19 @@
+.conversions{
+    margin: auto;
+}
+
+.main_label{
+    font-weight: bold;
+    font-size: 12;
+}
+
+textarea {
+    resize: both;
+    height: 250px;
+    width: 800px;
+}
+
+.input{
+    height: 40%;
+    width: 25%;
+}

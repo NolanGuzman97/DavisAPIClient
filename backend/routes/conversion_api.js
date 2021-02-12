@@ -11,23 +11,32 @@ async function conversionRequest(ids,rep, response) {
         let promiseArr = ids.map(id => 
             axios.post(`${baseUrl}/${id}/${rep}`)
                 .then(res => 
-                    res.data))
+                    [id,res.data]))
         //Fulfill all promises at one time, returning array of results from API
-        Promise.all(promiseArr).then(res => {
-            //With passed response variable from our get call, we can send our axios data
-            //direct to the page
-            response.send(res)
-        })
+        Promise.all(promiseArr)
+                .then(res => {
+                //With passed response variable from our get call, we can send our axios data
+                //direct to the page
+                response.json(res)})   
+                .catch(err => {
+                    console.log(err.response.data)
+                    response.status(404).json({error: err.response.data})
+                })
     //Handles single list inputs
     } else{
         //Create single promise
         let promise = axios.post(`${baseUrl}/${ids}/${rep}`)
                         .then(res => 
-                            res.data)
+                            [ids, res.data])
         //Resolve promise and register results to page
-        Promise.resolve(promise).then(res => {
-            response.send(res)
-        })
+        Promise.resolve(promise)
+            .then(res => {
+                response.json([res])
+            })   
+            .catch(err => {
+                console.log(err.response.data)
+                response.status(404).json({error: err.response.data})
+            }) 
     }
     
 }
@@ -43,7 +52,9 @@ router.get('/:rep', (req, res) => {
     let rep = req.params.rep
     //Use Axios post request to call our external API
     //API FORMAT: baseURL/"structure identifier(id)"/"representation(rep)"
+
     conversionRequest(ids,rep, res)
+    
 })
 
 module.exports = router;
