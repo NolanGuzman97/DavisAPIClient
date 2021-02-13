@@ -6,17 +6,15 @@ services:
       dockerfile: Dockerfile-dev
     ports:
       - "3000:3000"
-    container_name: node-backend
+    container_name: express-backend
     volumes:
       - ./backend:/home/node/app/backend
-      #- /home/node/app/backend/node_modules
   angular-ui:
     build:
       context: ./frontend
       dockerfile: Dockerfile-dev
     ports: 
       - "4201:4201"
-    container_name: testapp
+    container_name: angular-frontend
     volumes:
       - ./frontend:/home/node/app/frontend
-      #- /home/node/app/frontend/node_modules 
