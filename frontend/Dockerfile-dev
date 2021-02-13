@@ -2,6 +2,8 @@
 FROM node:current-alpine3.10 AS base_build
 WORKDIR /home/node/app/frontend
 COPY package*.json ./
+#Bug with Angular and latest NPM so forcing downgrade
+RUN npm install -g npm@6.14.11
 RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
 EXPOSE 4201
 CMD ["npm", "start"]

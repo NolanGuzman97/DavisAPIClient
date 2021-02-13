@@ -1,15 +1,33 @@
 const express = require('express')
 const conversion_api = require('./routes/conversion_api')
-const cors = require('cors')
+const helmet = require('helmet')
 
-function createServer() {
+function createServer(NODE_ENV) {
     let app = express()
-    //Using cors to allow cross communication with angular frontend
-    app.use(cors())
-    app.use(express.json())
-    app.use("/", conversion_api)
-    
+
+    if(NODE_ENV === "DEV"){
+        app.use(express.json())
+        app.use("/", conversion_api)
+        
+    } else if(NODE_ENV === "PROD"){
+        // Add headers for production
+        app.use(function (req, res, next) {
+
+            // Website you wish to allow to connect
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+            // Request methods you wish to allow
+            res.setHeader('Access-Control-Allow-Methods', 'GET');
+
+            // Pass to next layer of middleware
+            next();
+        });
+        app.use(helmet())
+        app.use(express.json())
+        app.use("/", conversion_api)
+    }
     return app
+    
 }
 
 module.exports = createServer
