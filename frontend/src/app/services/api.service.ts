@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const baseUrl = 'http://localhost:3000'
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class ApiService {
 
   //create get request to call express backed call /:rep
   get(rep:any, ids:any): Observable<any> {
-    return this.http.get(`${baseUrl}/${rep}`, {params: this.addParameters(ids)})
+    return this.http.get(`${environment.baseUrl}/${rep}`, {params: this.addParameters(ids)})
   }
 
   //use to interpret multiple chemicals to parameter format
