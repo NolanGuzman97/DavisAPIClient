@@ -28,3 +28,7 @@ Dev Installation steps:
 Production links:
 
 1. If you'd like to just see the application in action visit: http://198.199.90.120:4200 (Deployed on DigitalOcean Droplet through Docker)
+
+Run simple test suite (backend only):
+1. Change directory to `./backend`
+2. Run `npm run test` and this will run some simple unit tests via jest
