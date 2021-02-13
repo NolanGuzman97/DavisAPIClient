@@ -1,7 +1,7 @@
 # Stage 1
 FROM node:current-alpine3.10 AS stage_build
 WORKDIR /home/node/app/
-COPY package*.json ./
+COPY package.json ./
 #Bug with Angular and latest NPM so forcing downgrade
 RUN npm install
 COPY . .

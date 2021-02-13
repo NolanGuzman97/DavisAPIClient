@@ -14,7 +14,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile-dev
     ports: 
-      - "4201:4201"
+      - "4200:4200"
     container_name: angular-frontend
     volumes:
       - ./frontend:/home/node/app/frontend
